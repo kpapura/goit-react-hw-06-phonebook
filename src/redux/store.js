@@ -1,17 +1,8 @@
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-  persistReducer,
-  persistStore,
-} from 'redux-persist';
-
+import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer, persistStore} from 'redux-persist';
 import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
-import contactReducer from './contacts/contactsSlice';
+
+import { contactsReducer } from './contacts/contactsSlice';;
 
 const persistContactConfig = {
   key: 'contacts',
@@ -22,7 +13,7 @@ const persistContactConfig = {
 
 const persistedContactsReducer = persistReducer(
   persistContactConfig,
-  contactReducer
+  contactsReducer
 );
 
 export const store = configureStore({
@@ -39,4 +30,4 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV === 'development',
 });
 
-export const persistor = persistStore(store);
+export let persistor = persistStore(store);
